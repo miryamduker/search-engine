@@ -2,6 +2,9 @@
 
 A scalable web crawler that systematically explores all pages of a given website using the BFS algorithm and indexes them into Elasticsearch, enabling fast and efficient search capabilities.
 
+## Demo
+👀🚀 Watch the demo video to see the project in action:  [Demo Video](https://youtu.be/xeyb3NQMLMU)
+
 ## **Tech Stack**
 - **Java & Spring Boot** – Backend development.
 - **Kafka** – Manages distributed crawling.
