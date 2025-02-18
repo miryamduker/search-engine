@@ -16,6 +16,10 @@ A scalable web crawler that systematically explores all pages of a given website
 - **Elasticsearch Indexing:** Stores and indexes crawled pages for fast searching.
 - **Dockerized Deployment:** Easily deployable using Docker.
 
+### **Try it out**
+You can test the API using the Swagger UI:
+👉 [Swagger UI](https://miryam-enginesearch.runmydocker-app.com/swagger-ui.html#/)
+
 ## **Run Locally**
 
 ### **Prerequisites**
@@ -34,4 +38,3 @@ You need to have docker installed.
    ```sh
    docker-compose -f docker-compose-local.yml up -d
    ```
-
