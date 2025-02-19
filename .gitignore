@@ -1,0 +1,9 @@
+# Ignore application.properties file
+application.properties
+
+# Ignore all hidden files (dotfiles) except .gitignore itself
+.*
+!.gitignore
+
+# Ignore the target directory (commonly used by Maven/Gradle)
+target/
