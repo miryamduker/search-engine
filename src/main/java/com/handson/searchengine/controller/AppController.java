@@ -5,6 +5,8 @@ import com.handson.searchengine.crawler.Crawler;
 import com.handson.searchengine.kafka.Producer;
 import com.handson.searchengine.model.CrawlStatusOut;
 import com.handson.searchengine.model.CrawlerRequest;
+import com.handson.searchengine.service.RedisService;
+import com.handson.searchengine.util.CrawlIdGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,9 +25,12 @@ public class AppController {
     @Autowired
     Producer producer;
 
+    @Autowired
+    RedisService redisService;
+
     @RequestMapping(value = "/crawl", method = RequestMethod.POST)
     public String crawl(@RequestBody CrawlerRequest request) throws IOException, InterruptedException {
-        String crawlId = generateCrawlId();
+        String crawlId = CrawlIdGenerator.generate();
         if (!request.getUrl().startsWith("http")) {
             request.setUrl("https://" + request.getUrl());
         }
@@ -42,16 +47,6 @@ public class AppController {
 
     @RequestMapping(value = "/crawl/{crawlId}", method = RequestMethod.GET)
     public CrawlStatusOut getCrawl(@PathVariable String crawlId) throws IOException, InterruptedException {
-        return crawler.getCrawlInfo(crawlId);
-    }
-
-
-    private String generateCrawlId() {
-        String charPool = "ABCDEFHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-        StringBuilder res = new StringBuilder();
-        for (int i = 0; i < ID_LENGTH; i++) {
-            res.append(charPool.charAt(random.nextInt(charPool.length())));
-        }
-        return res.toString();
+        return redisService.getCrawlInfo(crawlId);
     }
 }
